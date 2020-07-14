@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  redis:
+    image: "redis:5.0.9"
+    container_name: "redis-5"
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-5-data:/data
+  postgres:
+    image: "postgres:12.3"
+    container_name: "postgresql-12"
+    ports:
+      - 5432:5432
+    volumes:
+      - postgresql-12-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "photoprof_api"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+volumes:
+  redis-5-data:
+  postgresql-12-data:
