@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  redis:
+    image: "redis:5.0.14"
+    container_name: "redis-5"
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-5-data:/data
+  postgres:
+    image: "postgres:13.4"
+    container_name: "postgresql-13"
+    ports:
+      - 5432:5432
+    volumes:
+      - postgresql-13-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "photoprof_api"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+  elasticsearch:
+    image: "elasticsearch:7.2.0"
+    container_name: "elasticsearch-7"
+    ports:
+      - 9200:9200
+    volumes:
+      - elasticsearch-7-data:/usr/share/elasticsearch/data
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+volumes:
+  redis-5-data:
+  postgresql-13-data:
+  elasticsearch-7-data:
